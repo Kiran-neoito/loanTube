@@ -177,7 +177,6 @@ export default function Home() {
               <div className="relative float-label-input">
                 <input
                   type="text"
-                  id="name"
                   value={loanTurnover}
                   onChange={handleChangeTurnOver}
                   placeholder="£"
