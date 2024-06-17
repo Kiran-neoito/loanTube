@@ -1,0 +1,102 @@
+/* src/components/CustomSelect.module.scss */
+
+.customSelect {
+  position: relative;
+  width: 300px; /* Adjust width as needed */
+}
+
+.label {
+  font-size: 14px;
+  color: #b43e6a;
+  margin-bottom: 4px;
+}
+
+.selectBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.arrow {
+  font-size: 18px;
+}
+
+.optionsContainer {
+  position: absolute;
+  top: 100%;
+  left: -2px;
+  width: 100.6%;
+  border: 2px solid rgb(77, 77, 77);
+  border-top: none;
+  background-color: white;
+  z-index: 1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.float-label-select {
+  border-color: rgb(119, 119, 119);
+  color: #777;
+  cursor: default;
+  font-weight: 500;
+  background-color: #ffffff;
+  line-height: 1.5;
+  border-inline-end-width: rgba(0, 0, 0, 0.88);
+  border-width: 2px;
+  font-size: clamp(20px, 2.128vh, 23px);
+  padding: 0 8px;
+}
+
+.option {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.float-label-input,
+.float-label-select {
+  border-color: rgb(119, 119, 119);
+  cursor: default;
+  font-weight: 500;
+  background-color: #ffffff;
+  line-height: 1.5;
+  border-inline-end-width: rgba(0, 0, 0, 0.88);
+  border-width: 2px;
+  font-size: clamp(20px, 2.128vh, 23px);
+  padding: 0 8px;
+}
+
+.float-label-select {
+  font-size: clamp(14px, 1.4814vh, 15px);
+}
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.9);
+  background-color: white;
+  padding-left: 10px;
+  width: max-content;
+  padding-right: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4814vh, 16px);
+}
+
+.float-label-select label {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transform: translateY(0rem) scale(0.9);
+}
+
+.float-label-select:focus-within label {
+  color: rgb(198, 0, 41);
+}
