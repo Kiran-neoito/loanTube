@@ -180,7 +180,6 @@ export default function Home() {
                   value={loanTurnover}
                   onChange={handleChangeTurnOver}
                   placeholder="£"
-                  ref={inputRef}
                   className={`block w-full bg-white outline-none border-none rounded-md py-3 px-3 appearance-none leading-normal focus:shadow-none focus:border-transparent focus:ring-transparent text-gray-900`}
                 />
                 <label
