@@ -14,6 +14,7 @@ interface CustomSelectProps {
   options: Option[];
   placeholder?: string;
   label?: string;
+  isSelected?: boolean;
   onChange: (value: string) => void;
 }
 
@@ -21,11 +22,18 @@ const CustomSelect: FC<CustomSelectProps> = ({
   options,
   placeholder,
   label,
+  isSelected = false,
   onChange,
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isSelected) {
+      setIsOpen(true);
+    }
+  }, [isSelected]);
 
   const handleSelect = (value: string) => {
     setSelectedOption(value);

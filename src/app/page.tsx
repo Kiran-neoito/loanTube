@@ -14,8 +14,15 @@ export default function Home() {
   const [loanTurnover, setTurnover] = useState<string>("£");
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [cardPaymentValue, setCardPaymentValue] = useState<string>("");
+  const [isAnnualSales, setAnnualSales] = useState<boolean>(false);
+  const [isCustomerSales, setCustomerSales] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const inputRef1 = useRef<HTMLInputElement>(null);
+  const inputRef2 = useRef<HTMLInputElement>(null);
+  const inputRef3 = useRef<HTMLInputElement>(null);
+  const inputRef4 = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -53,11 +60,37 @@ export default function Home() {
 
   const handleSelectChange = (value: string) => {
     setSelectedValue(value);
+    if (inputRef1.current) {
+      inputRef1.current.focus();
+    }
+  };
+
+  const handleSelectBusinessName = (value: string) => {
+    if (inputRef2.current) {
+      inputRef2.current.focus();
+      inputRef2.current.setSelectionRange(1, 1);
+    }
   };
 
   const handleSelectCardPayments = (value: string) => {
+    setAnnualSales((isValue) => false);
+    setCustomerSales((isValue) => false);
+
     setCardPaymentValue(value);
+    setTimeout(() => {
+      if (value === "yes") {
+        setAnnualSales((isValue) => true);
+      } else {
+        setCustomerSales((isValue) => true);
+      }
+    }, 500);
   };
+
+  const handleSelectAnnualSales = (value: string) => {
+    setCustomerSales((isValue) => true);
+  };
+
+  const handleSelectChangeCustomer = (value: string) => {};
 
   const optionPurpose = [
     { value: "Business Growth", label: "Business Growth" },
@@ -84,6 +117,44 @@ export default function Home() {
     { value: "25% - 50% of sales", label: "25% - 50% of sales" },
     { value: "50% - 75% of sales", label: "50% - 75% of sales" },
     { value: "More than 75% of sales", label: "More than 75% of sales" },
+  ];
+
+  const optionBusinessNames = [
+    {
+      value: "Business Growth",
+      title: "Business Growth",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Additional Cashflow",
+      title: "Additional Cashflow",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Stock & Inventory purchase",
+      title: "Stock & Inventory purchase",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Plant & Machinery Purchase",
+      title: "Plant & Machinery Purchase",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Vehicle Purchase",
+      title: "Vehicle Purchase",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Existing Loan Refinance",
+      title: "Existing Loan Refinance",
+      subTitle: "Docklands Business Center",
+    },
+    {
+      value: "Other Purpose",
+      title: "Other Purpose",
+      subTitle: "Docklands Business Center",
+    },
   ];
 
   return (
@@ -164,10 +235,11 @@ export default function Home() {
           <div className="flex w-1/2 mb-8 pr-3">
             <div className="flex-1">
               <Autosuggestion
-                options={optionPurpose}
+                options={optionBusinessNames}
                 placeholder="Type your Business name"
-                onChange={handleSelectChange}
+                onChange={handleSelectBusinessName}
                 label="Business name"
+                inputRef1={inputRef1}
               />
             </div>
           </div>
@@ -176,6 +248,7 @@ export default function Home() {
             <div className="flex-1">
               <div className="relative float-label-input">
                 <input
+                  ref={inputRef2}
                   type="text"
                   value={loanTurnover}
                   onChange={handleChangeTurnOver}
@@ -209,16 +282,18 @@ export default function Home() {
                 <CustomSelect
                   options={optionCardSale}
                   placeholder="Turnover from card sales"
-                  onChange={handleSelectChange}
+                  onChange={handleSelectAnnualSales}
                   label="Annual card sales"
+                  isSelected={isAnnualSales}
                 />
               </div>
               <div className="flex-1">
                 <CustomSelect
                   options={options}
                   placeholder="Do you issue invoices?"
-                  onChange={handleSelectChange}
+                  onChange={handleSelectChangeCustomer}
                   label="Invoices sent to customers"
+                  isSelected={isCustomerSales}
                 />
               </div>
             </div>
@@ -228,8 +303,9 @@ export default function Home() {
                 <CustomSelect
                   options={options}
                   placeholder="Do you issue invoices?"
-                  onChange={handleSelectChange}
+                  onChange={handleSelectChangeCustomer}
                   label="Invoices sent to customers"
+                  isSelected={isCustomerSales}
                 />
               </div>
             </div>

@@ -7,13 +7,15 @@ import styles from "./Autosuggestion.module.scss";
 
 interface Option {
   value: string;
-  label: string;
+  title: string;
+  subTitle: string;
 }
 
 interface AutosuggestionProps {
   options: Option[];
   placeholder?: string;
   label?: string;
+  inputRef1?: any;
   onChange: (value: string) => void;
 }
 
@@ -22,6 +24,7 @@ const Autosuggestion: FC<AutosuggestionProps> = ({
   placeholder,
   label,
   onChange,
+  inputRef1,
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -88,6 +91,7 @@ const Autosuggestion: FC<AutosuggestionProps> = ({
             value={selectedOption}
             placeholder={placeholder}
             onChange={handleSelectChange}
+            ref={inputRef1}
           />
           {isSelectedLoading ? (
             <div className="absolute inset-0 flex justify-center items-center mx-auto w-full h-full">
@@ -157,7 +161,10 @@ const Autosuggestion: FC<AutosuggestionProps> = ({
               }`}
               onClick={() => handleSelect(option.value)}
             >
-              {option.label}
+              <div className="font-bold uppercase pb-1">{option.title}</div>
+              <div className="text-gray-600 hover:text-red-700">
+                {option.subTitle}
+              </div>
             </div>
           ))}
         </div>
